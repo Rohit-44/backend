@@ -8,15 +8,6 @@ import userRouter from './Routes/userRoutes.js';
 import orderRouter from './Routes/orderRoutes.js';
 dotenv.config();
 
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('connected to db');
-  })
-  .catch((err) => {
-    console.log('error');
-  });
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,6 +23,15 @@ app.use('/api/orders', orderRouter);
 // });
 //xyz
 const port = 8000;
-app.listen(port, () => {
-  console.log(`listening to ${port}`);
-});
+
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log('connected to db');
+    app.listen(port, () => {
+      console.log(`listening to ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log('error');
+  });
