@@ -27,10 +27,10 @@ app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
 
-app.use((err, req, res, next) => {
-  res.status(500).send({ message: err.message });
-});
-const port = process.env.port || 8000;
+// app.use((err, req, res, next) => {
+//   res.status(500).send({ message: err.message });
+// });
+const port = 8000;
 app.listen(port, () => {
   console.log(`listening to ${port}`);
 });
